@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "5.4.0",
+    "generators": {
+      "php-dt": {
+        "disabled": true,
+        "generatorName": "php-dt",
+        "inputSpec": "../sdks/openapi.yaml",
+        "output": "../sdks/php-dt",
+        "glob": "./spec/global.yaml",
+        "gitUserId": "jamesvweston",
+        "gitRepoId": "php_dt",
+        "additionalProperties": {
+          "modern": true,
+          "srcBasePath": "src",
+          "invokerPackage": "Apis",
+          "modelPackage": "Models",
+          "variableNamingConvention": "original"
+        }
+      },
+      "project-ts": {
+        "generatorName": "typescript-axios",
+        "inputSpec": "../sdks/openapi.yaml",
+        "output": "../sdks/project-ts",
+        "glob": "./spec/global.yaml",
+        "apiPackage": "apis",
+        "modelPackage": "models",
+        "additionalProperties": {
+          "npmName": "project-ts",
+          "paramNaming": "original",
+          "enumPropertyNaming": "original",
+          "stringEnums": true,
+          "useSingleRequestParameter": true,
+          "withSeparateModelsAndApi": true,
+          "withoutPrefixEnums": true
+        }
+      }
+    }
+  }
+}

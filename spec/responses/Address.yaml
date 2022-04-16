@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Address
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  responses:
+    AddressResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Address"
+  schemas:
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+      required:
+        - id
+        - name
+        - street1
+        - street2
+        - city
+        - state
+        - zip
+        - country

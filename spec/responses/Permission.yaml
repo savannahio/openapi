@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: Permission
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  parameters:
+    PermissionOrderBy:
+      in: query
+      name: "order_by"
+      required: false
+      schema:
+        $ref: "#/components/schemas/PermissionOrderBy"
+  responses:
+    PaginatedPermissions:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaginatedPermissions"
+    PermissionResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Permission"
+  schemas:
+    PermissionName:
+      type: string
+      enum:
+        - create users
+        - update users
+        - delete users
+        - show users
+        - view users
+        - view roles
+        - view permissions
+        - view user roles
+        - update user roles
+        - view user permissions
+        - update user permissions
+    PermissionOrderBy:
+      type: string
+      enum:
+        - permissions.id
+        - permissions.name
+      default: permissions.id
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          $ref: '#/components/schemas/PermissionName'
+      required:
+        - id
+        - na e
+    PaginatedPermissions:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Permission"
+      required:
+        - data

@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Role
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  parameters:
+    RoleOrderBy:
+      in: query
+      name: "order_by"
+      required: false
+      schema:
+        $ref: "#/components/schemas/RoleOrderBy"
+  responses:
+    PaginatedRoles:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaginatedRoles"
+    RoleResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Role"
+  schemas:
+    RoleName:
+      type: string
+      enum:
+        - admin
+        - developer
+        - user management
+        - role management
+        - permission management
+    RoleOrderBy:
+      type: string
+      enum:
+        - roles.id
+        - roles.name
+      default: roles.id
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          $ref: "#/components/schemas/RoleName"
+      required:
+        - id
+        - name
+    PaginatedRoles:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Role"
+      required:
+        - data

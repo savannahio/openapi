@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: Permission Requests
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths:
+  /permissions:
+    get:
+      tags:
+        - "permissions"
+      operationId: "getPermissions"
+      parameters:
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/Permission.yaml#/components/parameters/PermissionOrderBy"
+      responses:
+        200:
+          $ref: "../responses/Permission.yaml#/components/responses/PaginatedPermissions"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"

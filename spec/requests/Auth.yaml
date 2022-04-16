@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Auth Requests
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths:
+  /auth/login:
+    post:
+      tags:
+        - "auth"
+      operationId: "login"
+      requestBody:
+        $ref: "../responses/Auth.yaml#/components/requestBodies/LoginRequest"
+      responses:
+        200:
+          description: "Good response"
+        422:
+          $ref: "../global.yaml#/components/responses/ValidationError"
+  /auth/logout:
+    get:
+      tags:
+        - "auth"
+      operationId: "logout"
+      responses:
+        200:
+          description: "Good response"
+  /auth/reset_password:
+    post:
+      tags:
+        - "auth"
+      operationId: "resetPassword"
+      requestBody:
+        $ref: "../responses/Auth.yaml#/components/requestBodies/ResetPasswordRequest"
+      responses:
+        200:
+          description: "Good response"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+        422:
+          $ref: "../global.yaml#/components/responses/ValidationError"
+
+  /auth/csrf-cookie:
+    get:
+      tags:
+        - "auth"
+      operationId: "getAuthCookie"
+      responses:
+        204:
+          description: "Good response"
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+  /email/verify/resend:
+    post:
+      tags:
+        - "auth"
+      operationId: "resendVerificationEmail"
+      responses:
+        200:
+          description: "Good response"
+        400:
+          $ref: "../global.yaml#/components/responses/BadRequestError"

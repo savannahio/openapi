@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: Role Requests
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths:
+  /roles:
+    get:
+      tags:
+        - "roles"
+      operationId: "getRoles"
+      parameters:
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/Role.yaml#/components/parameters/RoleOrderBy"
+      responses:
+        200:
+          $ref: "../responses/Role.yaml#/components/responses/PaginatedRoles"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"

@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: AccessToken Requests
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths:
+  /access_tokens:
+    get:
+      tags:
+        - "access_tokens"
+      operationId: "getTokens"
+      parameters:
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/AccessToken.yaml#/components/parameters/AccessTokenOrderBy"
+      responses:
+        200:
+          $ref: "../responses/AccessToken.yaml#/components/responses/PaginatedAccessTokens"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+    post:
+      tags:
+        - "access_tokens"
+      operationId: "createToken"
+      requestBody:
+        $ref: "../responses/AccessToken.yaml#/components/requestBodies/CreateAccessTokenRequest"
+      responses:
+        201:
+          $ref: "../responses/AccessToken.yaml#/components/responses/NewAccessTokenResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+
+  /access_tokens/{id}:
+    delete:
+      tags:
+        - "access_tokens"
+      operationId: "deleteToken"
+      parameters:
+        - $ref: "../responses/AccessToken.yaml#/components/parameters/AccessTokenRouteParam"
+      responses:
+        204:
+          description: "Successful operation"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"

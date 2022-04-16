@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: User
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  parameters:
+    UserIdRouteParam:
+      in: path
+      name: "id"
+      required: true
+      schema:
+        type: integer
+        format: int64
+    UserOrderBy:
+      in: query
+      name: "order_by"
+      required: false
+      schema:
+        $ref: "#/components/schemas/UserOrderBy"
+  requestBodies:
+    CreateUserRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateUserRequest"
+    UpdateUserRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateUserRequest"
+  responses:
+    PaginatedUsers:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaginatedUsers"
+    AuthUserResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthUser"
+    UserResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+  schemas:
+    UserOrderBy:
+      type: string
+      enum:
+        - users.id
+        - users.first_name
+        - users.last_name
+        - users.email
+      default: users.id
+    CreateUserRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        password_confirmation:
+          type: string
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+        - password_confirmation
+    UpdateUserRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+      required:
+        - id
+        - first_name
+        - last_name
+        - email
+    UserMeta:
+      type: object
+      properties:
+        is_email_verified:
+          type: boolean
+      required:
+        - is_email_verified
+    AuthUser:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            meta:
+              $ref: '#/components/schemas/UserMeta'
+            roles:
+              type: array
+              items:
+                $ref: './Role.yaml#/components/schemas/Role'
+            permissions:
+              type: array
+              items:
+                $ref: './Permission.yaml#/components/schemas/Permission'
+          required:
+            - meta
+            - roles
+            - permissions
+    PaginatedUsers:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+      required:
+        - data

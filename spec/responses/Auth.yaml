@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Auth
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  requestBodies:
+    LoginRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginRequest"
+    ResetPasswordRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResetPasswordRequest"
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    ResetPasswordRequest:
+      type: object
+      properties:
+        new_password:
+          type: string
+        new_password_confirmation:
+          type: string
+      required:
+        - new_password
+        - new_password_confirmation

@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: PersonalAccessToken
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths: {}
+
+components:
+  parameters:
+    AccessTokenRouteParam:
+      in: path
+      name: "id"
+      required: true
+      schema:
+        type: integer
+        format: int64
+    AccessTokenOrderBy:
+      in: query
+      name: "order_by"
+      required: false
+      schema:
+        $ref: "#/components/schemas/AccessTokenOrderBy"
+  requestBodies:
+    CreateAccessTokenRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateAccessTokenRequest"
+  responses:
+    PaginatedAccessTokens:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaginatedAccessTokens"
+    NewAccessTokenResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NewAccessToken"
+    PersonalAccessTokenResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PersonalAccessToken"
+  schemas:
+    AccessTokenOrderBy:
+      type: string
+      enum:
+        - personal_access_tokens.id
+        - personal_access_tokens.name
+      default: personal_access_tokens.id
+    CreateAccessTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    PersonalAccessToken:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - id
+        - name
+        - created_at
+        - updated_at
+    NewAccessToken:
+      type: object
+      properties:
+        accessToken:
+          $ref: '#/components/schemas/PersonalAccessToken'
+        plainTextToken:
+          type: string
+      required:
+        - accessToken
+        - plainTextToken
+    PaginatedAccessTokens:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/PersonalAccessToken"
+      required:
+        - data

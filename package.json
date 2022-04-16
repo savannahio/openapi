@@ -1,0 +1,18 @@
+{
+    "name": "openapi",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@openapitools/openapi-generator-cli": "^2.4.26",
+        "redoc-cli": "^0.13.10"
+    },
+    "scripts": {
+        "generate": "npm run generate-spec && openapi-generator-cli generate && npm run clean-ts-axios && npm run build-redoc",
+        "generate-spec": "openapi-generator-cli generate -g openapi-yaml -i ./spec/openapi.yaml -o ../sdks/openapi-yaml && npm run clean-spec",
+        "validate": "openapi-generator-cli validate -i ./spec/openapi.yaml",
+        "clean-spec": "cp ../sdks/openapi-yaml/openapi/openapi.yaml ../sdks/openapi.yaml && rm -rf ../sdks/openapi-yaml",
+        "clean-ts-axios": "cd ../sdks/project-ts && rm -rf .openapi-generator && npm i --save typescript@^4.6.3 axios@^0.26.1 @types/axios @types/node@^16.11.26",
+        "clean-php-dt": "cd ../sdks/php-dt && rm -rf .openapi-generator && rm .openapi-generator-ignore",
+        "build-redoc": "redoc-cli build ../sdks/openapi.yaml -t ./redoc.hbs -o ../api/public/documentation/api_documentation.html --title \"Api Documentation\" "
+    }
+}

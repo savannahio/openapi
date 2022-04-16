@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: User Requests
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+paths:
+  /users:
+    get:
+      tags:
+        - "users"
+      operationId: "getUsers"
+      parameters:
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/User.yaml#/components/parameters/UserOrderBy"
+      responses:
+        200:
+          $ref: "../responses/User.yaml#/components/responses/PaginatedUsers"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+    post:
+      tags:
+        - "users"
+      operationId: "createUser"
+      requestBody:
+        $ref: "../responses/User.yaml#/components/requestBodies/CreateUserRequest"
+      responses:
+        201:
+          $ref: "../responses/User.yaml#/components/responses/UserResponse"
+  /users/me:
+    get:
+      tags:
+        - "users"
+      operationId: "getMe"
+      responses:
+        200:
+          $ref: "../responses/User.yaml#/components/responses/AuthUserResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+  /users/{id}:
+    get:
+      tags:
+        - "users"
+      operationId: "showUser"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+      responses:
+        200:
+          $ref: "../responses/User.yaml#/components/responses/UserResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+    put:
+      tags:
+        - "users"
+      operationId: "updateUser"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+      requestBody:
+        $ref: "../responses/User.yaml#/components/requestBodies/UpdateUserRequest"
+      responses:
+        200:
+          $ref: "../responses/User.yaml#/components/responses/UserResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+  /users/{id}/roles:
+    get:
+      tags:
+        - "users"
+      operationId: "getUserRoles"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/Role.yaml#/components/parameters/RoleOrderBy"
+      responses:
+        200:
+          $ref: "../responses/Role.yaml#/components/responses/PaginatedRoles"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+  /users/{id}/permissions:
+    get:
+      tags:
+        - "users"
+      operationId: "getUserPermissions"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
+        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
+        - $ref: "../responses/Permission.yaml#/components/parameters/PermissionOrderBy"
+      responses:
+        200:
+          $ref: "../responses/Permission.yaml#/components/responses/PaginatedPermissions"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"

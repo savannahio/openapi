@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Title
+  version: 1.0.0
+servers:
+  - url: "http://localhost"
+    description: "Localhost"
+tags:
+  - name: "auth"
+  - name: "permissions"
+  - name: "access_tokens"
+  - name: "roles"
+  - name: "users"
+paths:
+  /auth/login:
+    $ref: "./requests/Auth.yaml#/paths/~1auth~1login"
+  /auth/logout:
+    $ref: "./requests/Auth.yaml#/paths/~1auth~1logout"
+  /auth/reset_password:
+    $ref: "./requests/Auth.yaml#/paths/~1auth~1reset_password"
+  /email/verify/resend:
+    $ref: "./requests/Auth.yaml#/paths/~1email~1verify~1resend"
+  /auth/csrf-cookie:
+    $ref: "./requests/Auth.yaml#/paths/~1auth~1csrf-cookie"
+  /permissions:
+    $ref: "./requests/Permission.yaml#/paths/~1permissions"
+  /access_tokens:
+    $ref: "./requests/AccessToken.yaml#/paths/~1access_tokens"
+  /access_tokens/{id}:
+    $ref: "./requests/AccessToken.yaml#/paths/~1access_tokens~1{id}"
+  /roles:
+    $ref: "./requests/Role.yaml#/paths/~1roles"
+  /users:
+    $ref: "./requests/User.yaml#/paths/~1users"
+  /users/me:
+    $ref: "./requests/User.yaml#/paths/~1users~1me"
+  /users/{id}:
+    $ref: "./requests/User.yaml#/paths/~1users~1{id}"
+  /users/{id}/roles:
+    $ref: "./requests/User.yaml#/paths/~1users~1{id}~1roles"
+  /users/{id}/permissions:
+    $ref: "./requests/User.yaml#/paths/~1users~1{id}~1permissions"
