@@ -7,4 +7,3 @@ services:
         tty: true
         volumes:
             - ../:/var/www/html
-            - ./.git:/var/www/html/.git
