@@ -36,6 +36,8 @@ paths:
     $ref: "./requests/User.yaml#/paths/~1users~1me"
   /users/{id}:
     $ref: "./requests/User.yaml#/paths/~1users~1{id}"
+  /users/{id}/default_address:
+    $ref: "./requests/User.yaml#/paths/~1users~1{id}~1default_address"
   /users/{id}/roles:
     $ref: "./requests/User.yaml#/paths/~1users~1{id}~1roles"
   /users/{id}/permissions:

@@ -20,15 +20,16 @@
           "variableNamingConvention": "original"
         }
       },
-      "project-ts": {
+      "api-ts-axios": {
         "generatorName": "typescript-axios",
         "inputSpec": "../sdks/openapi.yaml",
-        "output": "../sdks/project-ts",
+        "output": "../sdks/api-ts-axios",
         "glob": "./spec/global.yaml",
         "apiPackage": "apis",
         "modelPackage": "models",
         "additionalProperties": {
-          "npmName": "project-ts",
+          "npmName": "api-ts-axios",
+          "npmRepository": "https://github.com/savannahio/api-ts-axios",
           "paramNaming": "original",
           "enumPropertyNaming": "original",
           "stringEnums": true,

@@ -51,9 +51,14 @@ components:
           format: int64
         name:
           $ref: "#/components/schemas/RoleName"
+        permissions:
+          type: array
+          items:
+            $ref: "./Permission.yaml#/components/schemas/Permission"
       required:
         - id
         - name
+        - permissions
     PaginatedRoles:
       type: object
       properties:

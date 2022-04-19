@@ -52,6 +52,17 @@ paths:
           $ref: "../responses/User.yaml#/components/responses/UserResponse"
         401:
           $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+    delete:
+      tags:
+        - "users"
+      operationId: "deleteUser"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+      responses:
+        204:
+          description: "Successful operation"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
     put:
       tags:
         - "users"
@@ -65,20 +76,29 @@ paths:
           $ref: "../responses/User.yaml#/components/responses/UserResponse"
         401:
           $ref: "../global.yaml#/components/responses/UnauthenticatedError"
-  /users/{id}/roles:
+  /users/{id}/default_address:
     get:
       tags:
         - "users"
-      operationId: "getUserRoles"
+      operationId: "getUserDefaultAddress"
       parameters:
         - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
-        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
-        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
-        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
-        - $ref: "../responses/Role.yaml#/components/parameters/RoleOrderBy"
       responses:
         200:
-          $ref: "../responses/Role.yaml#/components/responses/PaginatedRoles"
+          $ref: "../responses/Address.yaml#/components/responses/AddressResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+    put:
+      tags:
+        - "users"
+      operationId: "updateUserDefaultAddress"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+      requestBody:
+        $ref: "../responses/Address.yaml#/components/requestBodies/AddressRequest"
+      responses:
+        200:
+          $ref: "../responses/Address.yaml#/components/responses/AddressResponse"
         401:
           $ref: "../global.yaml#/components/responses/UnauthenticatedError"
   /users/{id}/permissions:
@@ -88,12 +108,32 @@ paths:
       operationId: "getUserPermissions"
       parameters:
         - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
-        - $ref: "../global.yaml#/components/parameters/PageQueryParam"
-        - $ref: "../global.yaml#/components/parameters/PerPageQueryParam"
-        - $ref: "../global.yaml#/components/parameters/DirectionQueryParam"
-        - $ref: "../responses/Permission.yaml#/components/parameters/PermissionOrderBy"
       responses:
         200:
-          $ref: "../responses/Permission.yaml#/components/responses/PaginatedPermissions"
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "../responses/Permission.yaml#/components/schemas/Permission"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
+  /users/{id}/roles:
+    get:
+      tags:
+        - "users"
+      operationId: "getUserRoles"
+      parameters:
+        - $ref: "../responses/User.yaml#/components/parameters/UserIdRouteParam"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "../responses/Role.yaml#/components/schemas/Role"
         401:
           $ref: "../global.yaml#/components/responses/UnauthenticatedError"

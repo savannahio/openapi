@@ -8,6 +8,12 @@ servers:
 paths: {}
 
 components:
+  requestBodies:
+    AddressRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AddressRequest"
   responses:
     AddressResponse:
       description: "Successful operation"
@@ -29,6 +35,37 @@ components:
         street2:
           type: string
           nullable: true
+          default: null
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        is_default:
+          type: boolean
+      required:
+        - id
+        - name
+        - street1
+        - street2
+        - city
+        - state
+        - zip
+        - country
+    AddressRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+          nullable: true
+          default: null
         city:
           type: string
         state:
@@ -38,7 +75,6 @@ components:
         country:
           type: string
       required:
-        - id
         - name
         - street1
         - street2
