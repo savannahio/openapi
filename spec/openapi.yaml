@@ -12,6 +12,8 @@ tags:
   - name: "roles"
   - name: "users"
 paths:
+  /broadcasting/auth:
+    $ref: "./requests/Auth.yaml#/paths/~1broadcasting~1auth"
   /auth/login:
     $ref: "./requests/Auth.yaml#/paths/~1auth~1login"
   /auth/logout:

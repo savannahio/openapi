@@ -8,7 +8,19 @@ servers:
 paths: {}
 
 components:
+  responses:
+    AuthorizeBroadcastingResponse:
+      description: "Successful operation"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthorizeBroadcasting"
   requestBodies:
+    AuthorizeBroadcastingRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthorizeBroadcastingRequest"
     LoginRequest:
       content:
         application/json:
@@ -20,6 +32,16 @@ components:
           schema:
             $ref: "#/components/schemas/ResetPasswordRequest"
   schemas:
+    AuthorizeBroadcastingRequest:
+      type: object
+      properties:
+        socket_id:
+          type: string
+        channel_name:
+          type: string
+      required:
+        - name
+        - channel_name
     LoginRequest:
       type: object
       properties:
@@ -40,3 +62,10 @@ components:
       required:
         - new_password
         - new_password_confirmation
+    AuthorizeBroadcasting:
+      type: object
+      properties:
+        auth:
+          type: string
+      required:
+        - auth

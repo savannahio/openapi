@@ -6,6 +6,18 @@ servers:
   - url: "http://localhost"
     description: "Localhost"
 paths:
+  /broadcasting/auth:
+    post:
+      tags:
+        - "auth"
+      operationId: "authorizeBroadcasting"
+      requestBody:
+        $ref: "../responses/Auth.yaml#/components/requestBodies/AuthorizeBroadcastingRequest"
+      responses:
+        201:
+          $ref: "../responses/Auth.yaml#/components/responses/AuthorizeBroadcastingResponse"
+        401:
+          $ref: "../global.yaml#/components/responses/UnauthenticatedError"
   /auth/login:
     post:
       tags:
