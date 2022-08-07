@@ -4,7 +4,8 @@ RUN apk --no-cache --update add  \
     bash \
     openjdk11 \
     nodejs  \
-    npm
+    npm \
+    git
 
 USER root
 
